@@ -7,6 +7,7 @@ import com.transaction.TransactionMicroService.Repos.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Service
@@ -19,9 +20,9 @@ public class TransactionService {
     TransactionRepository transactionRepository;
 
     //deposits the defined amount into the chosen account
-    public void credit(Long id, int amount){
+    public void credit(Long id, BigDecimal amount){
         Account account = accountRepository.findById(id).get();
-        account.setBalance(account.getBalance() + amount);
+        account.setBalance(account.getBalance().add(amount));
         accountRepository.save(account);
 
         Transaction transaction = new Transaction();
@@ -34,10 +35,10 @@ public class TransactionService {
 
     //checks the balance of the account, and then takes money from the account if the funds are sufficient
 
-    public boolean debit(Long id, int amount){
+    public boolean debit(Long id, BigDecimal amount){
         Account account = accountRepository.findById(id).get();
-        if (account.getBalance() >= amount && amount >0){
-            account.setBalance(account.getBalance() - amount);
+        if (account.getBalance().compareTo(amount) >= 0  && amount.compareTo(BigDecimal.ZERO) > 0){
+            account.setBalance(account.getBalance().subtract(amount));
             accountRepository.save(account);
 
             Transaction transaction = new Transaction();

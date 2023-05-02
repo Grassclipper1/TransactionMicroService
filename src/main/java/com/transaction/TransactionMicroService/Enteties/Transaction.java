@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,7 +17,7 @@ public class Transaction {
     @Column(name = "transaction_type")
     String transactionType;
 
-    int amount;
+    BigDecimal amount;
 
     Long userId;
 
@@ -26,7 +27,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String transactionType, int amount, Long userId, LocalDateTime transactionDate) {
+    public Transaction(String transactionType, BigDecimal amount, Long userId, LocalDateTime transactionDate) {
         this.transactionType = transactionType;
         this.amount = amount;
         this.userId = userId;
