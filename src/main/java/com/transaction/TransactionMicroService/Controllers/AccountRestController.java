@@ -30,7 +30,7 @@ public class AccountRestController {
         transactionService.credit(id, amount);
         return ResponseEntity.ok("Credit transaction completed successfully");
     }
-    //Returns different response depending if the transaction was successful or not, based on your balance
+    //Returns different response depending on if the transaction was successful or not, based on your balance
     @PostMapping("/debit/{id}")
     public ResponseEntity<String> debit(@PathVariable Long id, @RequestParam BigDecimal amount){
         boolean success = transactionService.debit(id, amount);
