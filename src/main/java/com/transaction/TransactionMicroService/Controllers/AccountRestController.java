@@ -25,11 +25,13 @@ public class AccountRestController {
         return account;
     }
 
+    //adds "money" to your account
     @PostMapping("/credit/{id}")
     public ResponseEntity<String> credit(@PathVariable Long id, @RequestParam BigDecimal amount){
         transactionService.credit(id, amount);
         return ResponseEntity.ok("Credit transaction completed successfully");
     }
+    //removes money from your account
     //Returns different response depending on if the transaction was successful or not, based on your balance
     @PostMapping("/debit/{id}")
     public ResponseEntity<String> debit(@PathVariable Long id, @RequestParam BigDecimal amount){

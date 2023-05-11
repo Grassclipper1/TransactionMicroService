@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+//creates transaction object
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
